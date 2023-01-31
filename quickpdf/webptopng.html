@@ -1,7 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Convert WebP to PNG</title>
+</head>
+<body>
+  <h1>Convert WebP to PNG</h1>
+  <form>
+    <input type="file" id="fileInput" accept="image/webp">
+    <button type="button" onclick="convert()">Convert to PNG</button>
+  </form>
   <script>
     function convert() {
       var fileInput = document.getElementById("fileInput");
@@ -25,11 +35,5 @@
       xhr.send(formData);
     }
   </script>
-</head>
-<body>
-  <form>
-    <input type="file" id="fileInput" accept="image/webp">
-    <button type="button" onclick="convert()">Convert to PNG</button>
-  </form>
 </body>
 </html>

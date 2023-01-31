@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+import io
+from PIL import Image
+from flask import Flask, request, send_file,render_template
 
 app = Flask(__name__)
 
@@ -25,6 +27,127 @@ def bmp_to_png():
 @app.route("/pngtopdf", methods=["GET"])
 def png_to_pdf():
     return render_template("pngtopdf.html")
+
+if __name__ == "__main__":
+    app.run()
+
+
+
+app = Flask(__name__)
+
+@app.route("/api/jpgtopng", methods=["POST"])
+def jpg_to_png():
+    image = request.files.get("image")
+    if not image:
+        return "No image provided", 400
+
+    image = Image.open(image)
+    png_image = io.BytesIO()
+    image.save(png_image, format="PNG")
+    png_image.seek(0)
+
+    return send_file(
+        png_image,
+        mimetype="image/png",
+        as_attachment=True,
+        attachment_filename="image.png"
+    )
+
+if __name__ == "__main__":
+    app.run()
+
+
+app = Flask(__name__)
+
+@app.route("/api/pngtojpg", methods=["POST"])
+def png_to_jpg():
+    image = request.files.get("image")
+    if not image:
+        return "No image provided", 400
+
+    image = Image.open(image)
+    jpeg_image = io.BytesIO()
+    image.save(jpeg_image, format="JPEG")
+    jpeg_image.seek(0)
+
+    return send_file(
+        jpeg_image,
+        mimetype="image/jpeg",
+        as_attachment=True,
+        attachment_filename="image.jpeg"
+    )
+
+if __name__ == "__main__":
+    app.run()
+
+
+app = Flask(__name__)
+
+@app.route("/api/webptopng", methods=["POST"])
+def webp_to_png():
+    image = request.files.get("image")
+    if not image:
+        return "No image provided", 400
+
+    image = Image.open(image)
+    png_image = io.BytesIO()
+    image.save(png_image, format="PNG")
+    png_image.seek(0)
+
+    return send_file(
+        png_image,
+        mimetype="image/png",
+        as_attachment=True,
+        attachment_filename="image.png"
+    )
+
+if __name__ == "__main__":
+    app.run()
+
+
+app = Flask(__name__)
+
+@app.route("/api/bmptopng", methods=["POST"])
+def bmp_to_png():
+    image = request.files.get("image")
+    if not image:
+        return "No image provided", 400
+
+    image = Image.open(image)
+    png_image = io.BytesIO()
+    image.save(png_image, format="PNG")
+    png_image.seek(0)
+
+    return send_file(
+        png_image,
+        mimetype="image/png",
+        as_attachment=True,
+        attachment_filename="image.png"
+    )
+
+if __name__ == "__main__":
+    app.run()
+
+
+app = Flask(__name__)
+
+@app.route("/api/pngtopdf", methods=["POST"])
+def png_to_pdf():
+    image = request.files.get("image")
+    if not image:
+        return "No image provided", 400
+
+    image = Image.open(image)
+    pdf_image = io.BytesIO()
+    image.save(pdf_image, format="PDF")
+    pdf_image.seek(0)
+
+    return send_file(
+        pdf_image,
+        mimetype="application/pdf",
+        as_attachment=True,
+        attachment_filename="image.pdf"
+    )
 
 if __name__ == "__main__":
     app.run()

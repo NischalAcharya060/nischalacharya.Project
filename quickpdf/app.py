@@ -1,6 +1,6 @@
-import io
+from flask import Flask, request, Response, send_file,render_template
 from PIL import Image
-from flask import Flask, request, send_file,render_template
+import io
 
 app = Flask(__name__)
 
